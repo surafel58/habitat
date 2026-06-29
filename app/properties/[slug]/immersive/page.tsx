@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/site/navbar";
-import { HeroStage } from "@/components/site/hero-stage";
+import { ImmersiveViewer } from "@/components/three/immersive-viewer";
 import { getPropertyBySlug } from "@/lib/services/properties";
 
 export const dynamic = "force-dynamic";
@@ -14,6 +14,9 @@ export default async function ImmersivePage({
   const { slug } = await params;
   const property = await getPropertyBySlug(slug);
   if (!property) notFound();
+
+  // The AR model is the procedural digital twin exported to glTF (DESIGN.md §7.3).
+  const modelUrl = property.modelUrl ? "/models/sample-home.gltf" : null;
 
   return (
     <>
@@ -34,17 +37,19 @@ export default async function ImmersivePage({
         </p>
 
         <div className="mt-6">
-          <HeroStage />
+          <ImmersiveViewer
+            floorPlan={property.floorPlan}
+            modelUrl={modelUrl}
+            modelUsdzUrl={property.modelUsdzUrl}
+            title={property.title}
+          />
         </div>
 
-        <div className="mt-6 rounded-2xl border border-dashed border-border p-6 text-sm text-muted">
-          The live 360° tour, walkable 3D floor plan, WebXR VR walkthrough and AR
-          placement render here. This route is wired and the data
-          ({property.panoramas.length} panorama node
-          {property.panoramas.length === 1 ? "" : "s"}
-          {property.floorPlan ? " + floor plan" : ""}) is ready — the R3F canvas
-          is built in the next step.
-        </div>
+        <p className="mt-4 text-xs text-muted">
+          The 3D digital twin is generated procedurally from the property&apos;s floor-plan
+          data. Walk it in first person, orbit it as a dollhouse, or place it in your room
+          with AR from a phone.
+        </p>
       </main>
     </>
   );
