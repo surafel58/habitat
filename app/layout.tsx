@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { Fraunces } from "next/font/google";
 import "./globals.css";
+import { Navbar } from "@/components/site/navbar";
 
 const geistSans = Geist({
   variable: "--font-sans",
@@ -31,7 +32,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${fraunces.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }

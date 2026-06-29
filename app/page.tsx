@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Navbar } from "@/components/site/navbar";
 import { HeroStage } from "@/components/site/hero-stage";
 import { NlSearch } from "@/components/concierge/nl-search";
 
@@ -30,7 +29,6 @@ const PILLARS = [
 export default function Home() {
   return (
     <>
-      <Navbar />
       <main className="flex flex-1 flex-col">
         {/* Hero */}
         <section className="mx-auto grid w-full max-w-6xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:py-28">

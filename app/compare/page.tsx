@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Navbar } from "@/components/site/navbar";
 import { ComparePicker } from "@/components/compare/compare-picker";
 import {
   getPropertyOptions,
@@ -46,7 +45,6 @@ export default async function ComparePage({
 
   return (
     <>
-      <Navbar />
       <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-10">
         <h1 className="font-display text-3xl font-semibold tracking-tight">
           Compare homes

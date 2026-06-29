@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Navbar } from "@/components/site/navbar";
 import { CatalogFilters } from "@/components/catalog/filters";
 import { SortSelect } from "@/components/catalog/sort-select";
 import { PropertyCard } from "@/components/catalog/property-card";
@@ -38,7 +37,6 @@ export default async function PropertiesPage({
 
   return (
     <>
-      <Navbar />
       <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-10">
         <div className="mb-8">
           <h1 className="font-display text-3xl font-semibold tracking-tight">

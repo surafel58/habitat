@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Navbar } from "@/components/site/navbar";
 import { ImmersiveViewer } from "@/components/three/immersive-viewer";
 import { getPropertyBySlug } from "@/lib/services/properties";
 
@@ -20,7 +19,6 @@ export default async function ImmersivePage({
 
   return (
     <>
-      <Navbar />
       <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-10">
         <Link
           href={`/properties/${slug}`}

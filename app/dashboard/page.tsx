@@ -2,7 +2,6 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
-import { Navbar } from "@/components/site/navbar";
 import { PropertyCard } from "@/components/catalog/property-card";
 import { getSavedProperties } from "@/lib/services/wishlist";
 
@@ -25,7 +24,6 @@ export default async function DashboardPage() {
 
   return (
     <>
-      <Navbar />
       <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-10">
         <h1 className="font-display text-3xl font-semibold tracking-tight">
           Hello{session.user.name ? `, ${session.user.name.split(" ")[0]}` : ""}

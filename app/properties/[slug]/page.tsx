@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { Navbar } from "@/components/site/navbar";
 import { PropertyCard } from "@/components/catalog/property-card";
 import {
   getPropertyBySlug,
@@ -57,7 +56,6 @@ export default async function PropertyDetailPage({
 
   return (
     <>
-      <Navbar />
       <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-8">
         <Link
           href="/properties"
