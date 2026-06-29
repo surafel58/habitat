@@ -4,7 +4,7 @@ An AR/VR-enabled real-estate platform: browse listings, step inside a property a
 an immersive **digital twin** (360° tours + a walkable 3D floor plan), place a
 scaled model in your room with **AR**, compare homes, and ask an **AI concierge**.
 
-A personal project exploring how far browser-based 3D, AR, VR, and AI can go for property browsing.
+A project exploring how far browser-based 3D, AR, VR, and AI can go for property browsing. Full design rationale in [DESIGN.md](./DESIGN.md).
 
 ## Features
 
@@ -18,12 +18,12 @@ A personal project exploring how far browser-based 3D, AR, VR, and AI can go for
 
 ## Device / AR support
 
-| Device | 3D twin | VR | AR |
-|---|---|---|---|
-| Android Chrome | ✅ | ✅ WebXR | ✅ WebXR + Scene Viewer |
-| iOS Safari | ✅ | ➖ | ✅ Quick Look (needs USDZ) |
-| Desktop | ✅ orbit / walk | ➖ | open on phone |
-| Quest browser | ✅ | ✅ Enter VR | — |
+| Device         | 3D twin         | VR          | AR                         |
+| -------------- | --------------- | ----------- | -------------------------- |
+| Android Chrome | ✅              | ✅ WebXR    | ✅ WebXR + Scene Viewer    |
+| iOS Safari     | ✅              | ➖          | ✅ Quick Look (needs USDZ) |
+| Desktop        | ✅ orbit / walk | ➖          | open on phone              |
+| Quest browser  | ✅              | ✅ Enter VR | —                          |
 
 ## Tech stack
 
@@ -49,22 +49,22 @@ App runs at http://localhost:3000.
 
 ## Scripts
 
-| Script | Purpose |
-|---|---|
-| `pnpm dev` | Start the dev server |
-| `pnpm build` / `pnpm start` | Production build / serve |
-| `pnpm test` | Run unit tests (Vitest) |
-| `pnpm typecheck` | `tsc --noEmit` |
-| `pnpm lint` | ESLint |
-| `pnpm db:push` / `db:migrate` / `db:seed` / `db:studio` | Prisma DB tasks |
+| Script                                                  | Purpose                  |
+| ------------------------------------------------------- | ------------------------ |
+| `pnpm dev`                                              | Start the dev server     |
+| `pnpm build` / `pnpm start`                             | Production build / serve |
+| `pnpm test`                                             | Run unit tests (Vitest)  |
+| `pnpm typecheck`                                        | `tsc --noEmit`           |
+| `pnpm lint`                                             | ESLint                   |
+| `pnpm db:push` / `db:migrate` / `db:seed` / `db:studio` | Prisma DB tasks          |
 
 ## Environment variables
 
-| Var | Purpose |
-|---|---|
-| `DATABASE_URL` | Neon Postgres connection string |
-| `AUTH_SECRET` | Auth.js session secret (`npx auth secret`) |
-| `GEMINI_API_KEY` | Google AI Studio key (free tier) |
+| Var              | Purpose                                    |
+| ---------------- | ------------------------------------------ |
+| `DATABASE_URL`   | Neon Postgres connection string            |
+| `AUTH_SECRET`    | Auth.js session secret (`npx auth secret`) |
+| `GEMINI_API_KEY` | Google AI Studio key (free tier)           |
 
 ## Demo credentials
 
