@@ -89,6 +89,26 @@ export async function getFeaturedProperties(take = 3) {
   });
 }
 
+/** Lightweight options for the compare picker. */
+export async function getPropertyOptions() {
+  return prisma.property.findMany({
+    select: { slug: true, title: true, city: true },
+    orderBy: { title: "asc" },
+  });
+}
+
+/** Fetch a specific set of properties (for side-by-side compare). */
+export async function getPropertiesBySlugs(slugs: string[]) {
+  if (slugs.length === 0) return [];
+  const rows = await prisma.property.findMany({
+    where: { slug: { in: slugs } },
+  });
+  // preserve the order the user selected
+  return slugs
+    .map((s) => rows.find((r) => r.slug === s))
+    .filter((p): p is (typeof rows)[number] => Boolean(p));
+}
+
 /** Distinct cities + amenities for building filter facets. */
 export async function getFilterFacets() {
   const properties = await prisma.property.findMany({
