@@ -4,7 +4,7 @@ An AR/VR-enabled real-estate platform: browse listings, step inside a property a
 an immersive **digital twin** (360° tours + a walkable 3D floor plan), place a
 scaled model in your room with **AR**, compare homes, and ask an **AI concierge**.
 
-Built for the Grovyn AR/VR assignment. Full design rationale in [DESIGN.md](./DESIGN.md).
+A personal project exploring how far browser-based 3D, AR, VR, and AI can go for property browsing.
 
 ## Features
 
@@ -33,7 +33,7 @@ Built for the Grovyn AR/VR assignment. Full design rationale in [DESIGN.md](./DE
 - **Tailwind CSS v4** · **Google Gemini** (AI concierge, free tier)
 - **Vitest** (unit tests)
 
-Everything runs on free tiers — see DESIGN.md §5.1.
+Everything runs on free tiers (Vercel, Neon, Google AI Studio).
 
 ## Local setup
 

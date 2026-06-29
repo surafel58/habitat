@@ -111,7 +111,7 @@ export default function Home() {
         </section>
 
         <footer className="mt-auto border-t border-border px-6 py-8 text-center text-sm text-muted">
-          Habitat — built for the Grovyn AR/VR assignment.
+          Habitat — immersive real estate, right in your browser.
         </footer>
       </main>
     </>

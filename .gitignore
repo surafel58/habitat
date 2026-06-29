@@ -40,3 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# private docs (kept locally, not published)
+/DESIGN.md
+/ar_vr Assignment.md
