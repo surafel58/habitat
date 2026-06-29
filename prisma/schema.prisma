@@ -1,0 +1,126 @@
+// Habitat — immersive digital-twin real-estate platform
+// Schema mirrors DESIGN.md §6.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum PropertyType {
+  APARTMENT
+  VILLA
+  PLOT
+  COMMERCIAL
+}
+
+enum ListingStatus {
+  FOR_SALE
+  FOR_RENT
+  SOLD
+}
+
+enum InquiryStatus {
+  NEW
+  CONTACTED
+  SCHEDULED
+  CLOSED
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  name         String?
+  passwordHash String
+  role         Role       @default(USER)
+  wishlist     Wishlist[]
+  inquiries    Inquiry[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Property {
+  id           String        @id @default(cuid())
+  slug         String        @unique
+  title        String
+  description  String
+  type         PropertyType
+  status       ListingStatus @default(FOR_SALE)
+  price        Int // whole INR rupees (see DESIGN.md §18)
+  currency     String        @default("INR")
+  bedrooms     Int
+  bathrooms    Int
+  areaSqft     Int
+  city         String
+  locality     String
+  lat          Float?
+  lng          Float?
+  amenities    String[]
+  heroImage    String
+  gallery      String[]
+  // --- immersive assets ---
+  modelUrl     String? // GLB digital-twin model
+  modelUsdzUrl String? // iOS Quick Look fallback
+  floorPlan    Json? // room polygons -> procedural 3D extrusion
+  panoramas    Panorama[]
+  featured     Boolean       @default(false)
+  views        Int           @default(0)
+  wishlistedBy Wishlist[]
+  inquiries    Inquiry[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([city])
+  @@index([type])
+  @@index([price])
+}
+
+model Panorama {
+  id         String   @id @default(cuid())
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  propertyId String
+  name       String // e.g. "Living Room"
+  imageUrl   String // equirectangular
+  hotspots   Json // [{ label, yaw, pitch, targetPanoramaId }]
+  order      Int      @default(0)
+
+  @@index([propertyId])
+}
+
+model Wishlist {
+  id         String   @id @default(cuid())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  propertyId String
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, propertyId])
+  @@index([userId])
+}
+
+model Inquiry {
+  id         String        @id @default(cuid())
+  property   Property      @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  propertyId String
+  user       User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId     String?
+  name       String
+  email      String
+  phone      String?
+  message    String
+  visitDate  DateTime? // site-visit scheduling
+  status     InquiryStatus @default(NEW)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  @@index([propertyId])
+}
