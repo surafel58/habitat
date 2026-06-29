@@ -4,7 +4,7 @@ An AR/VR-enabled real-estate platform: browse listings, step inside a property a
 an immersive **digital twin** (360° tours + a walkable 3D floor plan), place a
 scaled model in your room with **AR**, compare homes, and ask an **AI concierge**.
 
-Built for the Grovyn AR/VR assignment. Full design rationale in [DESIGN.md](./DESIGN.md).
+Full design rationale in [DESIGN.md](./DESIGN.md).
 
 ## Features
 
