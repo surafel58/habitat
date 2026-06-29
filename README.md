@@ -4,7 +4,7 @@ An AR/VR-enabled real-estate platform: browse listings, step inside a property a
 an immersive **digital twin** (360° tours + a walkable 3D floor plan), place a
 scaled model in your room with **AR**, compare homes, and ask an **AI concierge**.
 
-A project exploring how far browser-based 3D, AR, VR, and AI can go for property browsing. Full design rationale in [DESIGN.md](./DESIGN.md).
+A project exploring how far browser-based 3D, AR, VR, and AI can go for property browsing.
 
 ## Features
 
