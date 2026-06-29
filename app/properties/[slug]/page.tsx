@@ -57,8 +57,8 @@ export default async function PropertyDetailPage({
         </Link>
 
         {/* Gallery */}
-        <div className="mt-4 grid gap-3 md:grid-cols-[2fr_1fr]">
-          <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-muted/20">
+        <div className="mt-4 grid gap-3 md:h-[460px] md:grid-cols-[2fr_1fr]">
+          <div className="relative h-72 overflow-hidden rounded-2xl bg-muted/20 md:h-full">
             <Image
               src={property.heroImage}
               alt={property.title}
@@ -68,11 +68,11 @@ export default async function PropertyDetailPage({
               className="object-cover"
             />
           </div>
-          <div className="grid grid-cols-3 gap-3 md:grid-cols-1">
+          <div className="grid grid-cols-3 gap-3 md:grid-cols-1 md:grid-rows-3">
             {property.gallery.slice(0, 3).map((g, i) => (
               <div
                 key={i}
-                className="relative aspect-[4/3] overflow-hidden rounded-xl bg-muted/20"
+                className="relative aspect-[4/3] overflow-hidden rounded-xl bg-muted/20 md:aspect-auto md:h-full"
               >
                 <Image
                   src={g}
