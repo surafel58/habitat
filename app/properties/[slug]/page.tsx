@@ -13,6 +13,7 @@ import { auth } from "@/lib/auth";
 import { formatINR, formatArea } from "@/lib/format";
 import { WishlistButton } from "@/components/catalog/wishlist-button";
 import { InquiryDialog } from "@/components/inquiry/inquiry-dialog";
+import { ConciergeChat } from "@/components/concierge/concierge-chat";
 
 export const dynamic = "force-dynamic";
 
@@ -137,6 +138,10 @@ export default async function PropertyDetailPage({
                 </div>
               </>
             )}
+
+            <div className="mt-8">
+              <ConciergeChat propertyId={property.id} />
+            </div>
           </div>
 
           {/* Sidebar */}

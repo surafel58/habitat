@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Navbar } from "@/components/site/navbar";
 import { HeroStage } from "@/components/site/hero-stage";
+import { NlSearch } from "@/components/concierge/nl-search";
 
 const PILLARS = [
   {
@@ -45,7 +46,13 @@ export default function Home() {
               it in 3D, tour it in VR, drop it into your room with AR, and let an
               AI concierge answer every question.
             </p>
-            <div className="flex flex-wrap gap-4 pt-2">
+            <div className="pt-2">
+              <NlSearch />
+              <p className="mt-2 text-xs text-muted">
+                Ask in plain language — our AI turns it into a search.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-4">
               <Link
                 href="/properties"
                 className="rounded-full bg-accent px-6 py-3 font-medium text-white transition-opacity hover:opacity-90"

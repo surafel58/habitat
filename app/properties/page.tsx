@@ -3,6 +3,7 @@ import { Navbar } from "@/components/site/navbar";
 import { CatalogFilters } from "@/components/catalog/filters";
 import { SortSelect } from "@/components/catalog/sort-select";
 import { PropertyCard } from "@/components/catalog/property-card";
+import { NlSearch } from "@/components/concierge/nl-search";
 import { listProperties, getFilterFacets } from "@/lib/services/properties";
 import { getWishlistIds } from "@/lib/services/wishlist";
 import { parsePropertyFilter } from "@/lib/validators/property";
@@ -43,9 +44,10 @@ export default async function PropertiesPage({
           <h1 className="font-display text-3xl font-semibold tracking-tight">
             Properties
           </h1>
-          <p className="mt-1 text-muted">
+          <p className="mt-1 mb-5 text-muted">
             Browse immersive listings — every featured home has a 3D tour and AR.
           </p>
+          <NlSearch />
         </div>
 
         <div className="grid gap-8 lg:grid-cols-[260px_1fr]">
