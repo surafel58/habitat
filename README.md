@@ -6,7 +6,24 @@ scaled model in your room with **AR**, compare homes, and ask an **AI concierge*
 
 Built for the Grovyn AR/VR assignment. Full design rationale in [DESIGN.md](./DESIGN.md).
 
-> **Status:** scaffolding in progress (see DESIGN.md §14 for the build plan).
+## Features
+
+- **Immersive 3D digital twin** — walls extruded procedurally from each property's floor-plan data; explore as a **dollhouse (orbit)** or in **first-person (WASD)**.
+- **WebXR VR** — "Enter VR" on supported headsets (native `navigator.xr`).
+- **AR** — `<model-viewer>` (Scene Viewer / Quick Look / WebXR) loads the twin exported to glTF, so you can place the home in your room from a phone.
+- **AI concierge (Gemini)** — natural-language search ("3 BHK in Pune under ₹1.5cr with parking") → structured filters, plus a grounded Q&A chat with **server-computed EMI**.
+- **Auth** (Auth.js JWT + one-click demo login), **wishlist**, **inquiry / site-visit booking**, and a **dashboard** of saved homes + requests.
+- **Catalog** with faceted filters, sort, pagination; **property detail** with gallery, specs, amenities, similar homes; **compare** up to 3 homes side by side.
+- Responsive, dark/light, accessible; graceful fallbacks everywhere (3D errors → 2D gallery, AI offline → deterministic answers).
+
+## Device / AR support
+
+| Device | 3D twin | VR | AR |
+|---|---|---|---|
+| Android Chrome | ✅ | ✅ WebXR | ✅ WebXR + Scene Viewer |
+| iOS Safari | ✅ | ➖ | ✅ Quick Look (needs USDZ) |
+| Desktop | ✅ orbit / walk | ➖ | open on phone |
+| Quest browser | ✅ | ✅ Enter VR | — |
 
 ## Tech stack
 
