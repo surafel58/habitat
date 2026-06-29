@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Property } from "@prisma/client";
 import { formatINR, formatArea } from "@/lib/format";
+import { WishlistButton } from "@/components/catalog/wishlist-button";
 
 const TYPE_LABEL: Record<string, string> = {
   APARTMENT: "Apartment",
@@ -10,7 +11,15 @@ const TYPE_LABEL: Record<string, string> = {
   COMMERCIAL: "Commercial",
 };
 
-export function PropertyCard({ property }: { property: Property }) {
+export function PropertyCard({
+  property,
+  saved = false,
+  authed = false,
+}: {
+  property: Property;
+  saved?: boolean;
+  authed?: boolean;
+}) {
   return (
     <Link
       href={`/properties/${property.slug}`}
@@ -33,6 +42,14 @@ export function PropertyCard({ property }: { property: Property }) {
               3D · AR
             </span>
           )}
+        </div>
+        <div className="absolute right-3 top-3">
+          <WishlistButton
+            propertyId={property.id}
+            initialSaved={saved}
+            authed={authed}
+            callbackUrl="/properties"
+          />
         </div>
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">

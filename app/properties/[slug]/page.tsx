@@ -8,7 +8,11 @@ import {
   getPropertyBySlug,
   getSimilarProperties,
 } from "@/lib/services/properties";
+import { getWishlistIds } from "@/lib/services/wishlist";
+import { auth } from "@/lib/auth";
 import { formatINR, formatArea } from "@/lib/format";
+import { WishlistButton } from "@/components/catalog/wishlist-button";
+import { InquiryDialog } from "@/components/inquiry/inquiry-dialog";
 
 export const dynamic = "force-dynamic";
 
@@ -42,7 +46,12 @@ export default async function PropertyDetailPage({
   const property = await getPropertyBySlug(slug);
   if (!property) notFound();
 
-  const similar = await getSimilarProperties(property);
+  const session = await auth();
+  const authed = Boolean(session?.user);
+  const [similar, savedIds] = await Promise.all([
+    getSimilarProperties(property),
+    authed ? getWishlistIds(session!.user.id) : Promise.resolve(new Set<string>()),
+  ]);
   const hasImmersive = Boolean(property.modelUrl || property.panoramas.length);
 
   return (
@@ -148,17 +157,23 @@ export default async function PropertyDetailPage({
                   Tour in 3D / VR / AR
                 </Link>
               )}
-              <button
-                type="button"
-                disabled
-                className="mt-3 w-full cursor-not-allowed rounded-full border border-border px-5 py-3 text-center font-medium text-muted opacity-70"
-                title="Coming in the next build step"
-              >
-                Schedule a visit
-              </button>
-              <p className="mt-3 text-center text-xs text-muted">
-                Saved homes &amp; site-visit booking arrive in the next step.
-              </p>
+              <div className="mt-3">
+                <WishlistButton
+                  propertyId={property.id}
+                  initialSaved={savedIds.has(property.id)}
+                  authed={authed}
+                  variant="full"
+                  callbackUrl={`/properties/${property.slug}`}
+                />
+              </div>
+              <div className="mt-3">
+                <InquiryDialog
+                  propertyId={property.id}
+                  propertyTitle={property.title}
+                  defaultName={session?.user?.name ?? ""}
+                  defaultEmail={session?.user?.email ?? ""}
+                />
+              </div>
             </div>
           </aside>
         </div>

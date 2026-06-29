@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { auth, signOut } from "@/lib/auth";
 
 const NAV_LINKS = [
   { href: "/properties", label: "Properties" },
@@ -6,7 +7,10 @@ const NAV_LINKS = [
   { href: "/properties", label: "How it works" },
 ];
 
-export function Navbar() {
+export async function Navbar() {
+  const session = await auth();
+  const user = session?.user;
+
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/80 backdrop-blur-md">
       <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
@@ -46,18 +50,44 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-3">
-          <Link
-            href="/sign-in"
-            className="hidden text-sm font-medium text-muted transition-colors hover:text-foreground sm:block"
-          >
-            Sign in
-          </Link>
-          <Link
-            href="/properties"
-            className="rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
-          >
-            Explore
-          </Link>
+          {user ? (
+            <>
+              <Link
+                href="/dashboard"
+                className="hidden text-sm font-medium text-muted transition-colors hover:text-foreground sm:block"
+              >
+                Dashboard
+              </Link>
+              <form
+                action={async () => {
+                  "use server";
+                  await signOut({ redirectTo: "/" });
+                }}
+              >
+                <button
+                  type="submit"
+                  className="rounded-full border border-border px-4 py-2 text-sm font-medium transition-colors hover:bg-card"
+                >
+                  Sign out
+                </button>
+              </form>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/sign-in"
+                className="hidden text-sm font-medium text-muted transition-colors hover:text-foreground sm:block"
+              >
+                Sign in
+              </Link>
+              <Link
+                href="/sign-up"
+                className="rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
+              >
+                Get started
+              </Link>
+            </>
+          )}
         </div>
       </nav>
     </header>

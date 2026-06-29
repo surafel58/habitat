@@ -4,7 +4,9 @@ import { CatalogFilters } from "@/components/catalog/filters";
 import { SortSelect } from "@/components/catalog/sort-select";
 import { PropertyCard } from "@/components/catalog/property-card";
 import { listProperties, getFilterFacets } from "@/lib/services/properties";
+import { getWishlistIds } from "@/lib/services/wishlist";
 import { parsePropertyFilter } from "@/lib/validators/property";
+import { auth } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -16,10 +18,13 @@ export default async function PropertiesPage({
   const params = await searchParams;
   const filter = parsePropertyFilter(params);
 
-  const [{ items, total, page, pageCount }, facets] = await Promise.all([
+  const session = await auth();
+  const [{ items, total, page, pageCount }, facets, savedIds] = await Promise.all([
     listProperties(filter),
     getFilterFacets(),
+    session?.user ? getWishlistIds(session.user.id) : Promise.resolve(new Set<string>()),
   ]);
+  const authed = Boolean(session?.user);
 
   const buildPageHref = (p: number) => {
     const next = new URLSearchParams();
@@ -67,7 +72,12 @@ export default async function PropertiesPage({
             ) : (
               <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
                 {items.map((p) => (
-                  <PropertyCard key={p.id} property={p} />
+                  <PropertyCard
+                    key={p.id}
+                    property={p}
+                    saved={savedIds.has(p.id)}
+                    authed={authed}
+                  />
                 ))}
               </div>
             )}
